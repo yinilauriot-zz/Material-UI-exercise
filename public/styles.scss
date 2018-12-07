@@ -1,0 +1,173 @@
+// variables
+$blue: #2196f3;
+$grey: #ddd;
+
+//Flexbox styles
+@mixin flexbox-container($direction: row, $wrap: wrap, $justify-content: flex-start, $align-items: flex-start) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+//media queries
+@mixin media($point) {
+    @if $point == mobileOnly {
+        @media (max-width: 767px) {
+            @content;
+        }
+    } @else if $point == fromTabletPortrait {
+        @media (min-width: 769px) {
+            @content;
+        }
+    } @else if $point == tabletLandscape {
+        @media (min-width: 768px) and (max-width: 1024px) {
+            @content;
+        }
+    } @else if $point == fromSmallDesktop {
+        @media (min-width: 1025px) {
+            @content;
+        }
+    } @else if $point == mediumDesktop {
+        @media (min-width: 1025px) and (max-width: 1260px) {
+            @content;
+        }
+    } @else if $point == fromMediumDesktop {
+        @media (min-width: 1261px) {
+            @content;
+        }
+    }
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  background: linear-gradient(90deg, rgba(99,92,231,1) 0%, rgba(104,37,193,1) 42%, rgba(0,212,255,1) 100%);
+}
+
+main {
+  background: url("images/Background.jpg") no-repeat;
+  background-size: cover;
+}
+
+.wrapper {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 6rem 0;
+  @include media(mobileOnly) {
+    padding: 2rem 0;
+  }
+}
+
+.profil-edito {
+  @include flexbox-container(row, nowrap, flex-start, center);
+  margin: 0 4rem 4rem;
+  @include media(mobileOnly) {
+    margin: 0 1rem 1rem;
+  }
+  h6, span {
+    margin: 0 2.5rem 0 0.8rem;
+    @include media(mobileOnly) {
+      margin: 0 1rem 0.4rem;
+    }
+  }
+  svg {
+    background-color: $blue;
+  }
+}
+
+.tabs {
+  margin: 0 4rem;
+  border-top: 1px solid $grey;
+  border-bottom: 1px solid $grey;
+  @include media(mobileOnly) {
+    margin: 0 1rem;
+  }
+  span {
+    color: rgba(0, 0, 0, 0.8);
+  }
+  span[class*="MuiPrivateTabIndicator-"] {
+    background-color: transparent;
+  }
+  button[aria-selected="true"] {
+    span[class*="MuiTab-label-"] {
+      color: $blue;
+      position: relative;
+      &:after {
+        content: "";
+        display: block;
+        height: 3px;
+        width: 100%;
+        position: absolute;
+        bottom: -16px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: $blue;
+      }
+    }
+  }
+}
+
+.tabcontent-title {
+  padding: 1rem 0;
+  border-bottom: 1px solid $grey;
+  p {
+    display: inline;
+    position: relative;
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: -20px;
+      width: 45%;
+      height: 3px;
+      background-color: $blue;
+    }
+  }
+  span[class*="MuiBadge-colorSecondary-"] {
+    border-radius: 15%;
+    background-color: $blue;
+  }
+}
+
+.tabcontent-items {
+  margin: 1rem auto;
+}
+
+.tabcontent-item {
+  @include flexbox-container(column, nowrap, center, flex-start);
+  padding: 1.5rem 1rem;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  @include media(fromTabletPortrait) {
+    @include flexbox-container(row, nowrap, space-around, center);
+  }
+  span {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    @include media(fromTabletPortrait) {
+      margin-bottom: 0;
+    }
+  }
+  .item-img {
+    padding: 0.25rem;
+    border: 1px solid $blue;
+    border-radius: 0.15rem;
+  }
+}
+
+.synchro {
+  @include flexbox-container(row, nowrap, flex-start, center);
+  svg {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+}
